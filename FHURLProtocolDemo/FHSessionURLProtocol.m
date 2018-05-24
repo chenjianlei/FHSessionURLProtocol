@@ -120,6 +120,7 @@ static NSString * const FHSESSIONURLPROTOCOL = @"FHSESSIONURLPROTOCOL";
 - (void)startLoading {
     NSMutableURLRequest *tableURLRequest = [self.request mutableCopy];
     [NSURLProtocol setProperty:@(YES) forKey:FHSESSIONURLPROTOCOL inRequest:tableURLRequest];
+    
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration ephemeralSessionConfiguration];
     self.session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:tableURLRequest];
@@ -144,7 +145,6 @@ static NSString * const FHSESSIONURLPROTOCOL = @"FHSESSIONURLPROTOCOL";
     [self.client URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed];   
     completionHandler(NSURLSessionResponseAllow);
 }
-
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
     [self.client URLProtocol:self didLoadData:data];
