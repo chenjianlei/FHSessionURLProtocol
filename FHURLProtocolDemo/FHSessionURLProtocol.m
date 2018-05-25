@@ -43,13 +43,13 @@
 
 - (void)exchange {
     self.status = YES;
-    Class oClass = NSClassFromString(@"") ?: NSClassFromString(@"");
+    Class oClass = NSClassFromString(@"__NSCFURLSessionConfiguration") ?: NSClassFromString(@"NSURLSessionConfiguration");
     [self _exchangeMethod:@selector(protocolClasses) oClass:oClass tClass:[self class]];
 }
 
 - (void)unExchange {
     self.status = NO;
-    Class oClass = NSClassFromString(@"") ?: NSClassFromString(@"");
+    Class oClass = NSClassFromString(@"__NSCFURLSessionConfiguration") ?: NSClassFromString(@"NSURLSessionConfiguration");
     [self _exchangeMethod:@selector(protocolClasses) oClass:oClass tClass:[self class]];
 }
 
