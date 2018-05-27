@@ -122,6 +122,7 @@ static NSString * const FHSESSIONURLPROTOCOL = @"FHSESSIONURLPROTOCOL";
     [NSURLProtocol setProperty:@(YES) forKey:FHSESSIONURLPROTOCOL inRequest:tableURLRequest];
     
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    sessionConfig.HTTPAdditionalHeaders = @{@"Proxy-Authorization": @"authHeader"};
     self.session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:tableURLRequest];
     [task resume];
@@ -152,6 +153,10 @@ static NSString * const FHSESSIONURLPROTOCOL = @"FHSESSIONURLPROTOCOL";
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask willCacheResponse:(NSCachedURLResponse *)proposedResponse completionHandler:(void (^)(NSCachedURLResponse *cachedResponse))completionHandler {
     completionHandler(proposedResponse);
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didFinishCollectingMetrics:(NSURLSessionTaskMetrics *)metrics {
+    NSLog(@"aa");
 }
 
 @end
